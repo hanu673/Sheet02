@@ -1,0 +1,11 @@
+package de.tha.prog2;
+
+public class OptimizedList extends List{
+	
+	public void clear() {
+		this.head = null;
+		this.tail = null;
+		this.size = 0;
+	}
+
+}
