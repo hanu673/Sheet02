@@ -1,0 +1,31 @@
+package de.tha.prog2;
+
+public class OptimizedVector extends Vector {
+
+	public void clear() {
+		this.data = new Object[0];
+		this.size = 0;
+	}
+
+	public boolean add(Object o) {
+		int newArrayLength;
+
+		if (this.size == this.data.length) {
+			if (this.size == 0) {
+				newArrayLength = 10;
+			} else {
+				newArrayLength = this.data.length * 2;
+			}
+			Object[] newArray = new Object[newArrayLength];
+			
+			for (int i = 0; i < this.size; i++) {
+				newArray[i] = this.data[i];
+			}
+			this.data = newArray;
+		}
+		this.data[size] = o;
+		this.size++;
+		return true;
+	}
+
+}
