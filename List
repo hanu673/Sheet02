@@ -1,0 +1,89 @@
+package de.tha.prog2;
+
+public class List extends AbstractContainer {
+
+	protected Node head;
+	protected Node tail;
+	protected int size;
+
+	@Override
+	public boolean add(Object o) {
+		Node newObj = new Node(o);
+		Node current = head;
+
+		if (head == null) {
+			head = newObj;
+			tail = newObj;
+			size++;
+			return true;
+		}
+
+		tail.next = newObj;
+		tail = newObj;
+		size++;
+		return true;
+	}
+
+	@Override
+	public Object get(int i) {
+		
+		if (i >= size || i < 0) {
+			return null;
+		}
+		
+		Node current = head;
+		for (int j = 0; j < i; j++) {
+			current = current.next;
+		}
+		return current.object;
+	}
+
+	@Override
+	public int size() {
+		return this.size;
+	}
+
+	@Override
+	public boolean remove(Object o) {
+		
+		if (head == null) {
+			return false;
+		}
+		
+		if (head.object.equals(o)) {
+			head = head.next;
+			size--;
+			return true;
+		}
+		
+		Node current = head;
+		
+		while (current.next != null) {
+			if (current.next.object.equals(o)) {
+				if (current.next.equals(tail)) {
+					current.next = null;
+					tail = current;
+					size--;
+					return true;
+				}
+				current.next = current.next.next;
+				size--;
+				return true;
+			}
+			current = current.next;
+		}
+		return false;
+	}
+
+}
+
+class Node {
+	Node next;
+	Object object;
+
+	public Node(Object o) {
+		this.next = null;
+		this.object = o;
+	}
+
+}
